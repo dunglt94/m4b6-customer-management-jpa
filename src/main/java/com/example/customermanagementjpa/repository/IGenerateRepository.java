@@ -1,5 +1,7 @@
 package com.example.customermanagementjpa.repository;
 
+import com.example.customermanagementjpa.model.Customer;
+
 import java.util.List;
 
 public interface IGenerateRepository<T> {
@@ -10,4 +12,6 @@ public interface IGenerateRepository<T> {
     void save(T t);
 
     void remove(int id);
+
+    boolean saveWithStoredProcedure(Customer customer);
 }

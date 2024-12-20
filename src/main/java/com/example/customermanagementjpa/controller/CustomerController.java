@@ -32,7 +32,7 @@ public class CustomerController {
 
     @PostMapping("/save")
     public String createCustomer(@ModelAttribute("customer") Customer customer) {
-        customerService.save(customer);
+        customerService.saveWithStoredProcedure(customer);
         return "redirect:/customers";
     }
 

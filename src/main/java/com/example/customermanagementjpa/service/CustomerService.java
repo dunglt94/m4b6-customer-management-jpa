@@ -10,26 +10,31 @@ import java.util.List;
 @Service
 public class CustomerService implements ICustomerService {
     @Autowired
-    private ICustomerRepository iCustomerRepository;
+    private ICustomerRepository customerRepository;
 
     @Override
     public List<Customer> findAll() {
-        return iCustomerRepository.findAll();
+        return customerRepository.findAll();
     }
 
     @Override
     public void save(Customer customer) {
-        iCustomerRepository.save(customer);
+        customerRepository.save(customer);
     }
 
     @Override
     public Customer findById(int id) {
-        return iCustomerRepository.findById(id);
+        return customerRepository.findById(id);
     }
 
     @Override
     public void remove(int id) {
-        iCustomerRepository.remove(id);
+        customerRepository.remove(id);
+    }
+
+    @Override
+    public boolean saveWithStoredProcedure(Customer customer) {
+        return customerRepository.saveWithStoredProcedure(customer);
     }
 }
 

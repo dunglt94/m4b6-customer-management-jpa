@@ -1,9 +1,5 @@
 package com.example.customermanagementjpa.configuration;
 
-import com.example.customermanagementjpa.repository.CustomerRepository;
-import com.example.customermanagementjpa.repository.ICustomerRepository;
-import com.example.customermanagementjpa.service.CustomerService;
-import com.example.customermanagementjpa.service.ICustomerService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -33,7 +29,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages = "com.example.customermanagementjpa.controller")
+@ComponentScan(basePackages = "com.example.customermanagementjpa")
 public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAware {
     private ApplicationContext applicationContext;
 
@@ -111,17 +107,5 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         properties.setProperty("hibernate.show_sql", "true");
         return properties;
-    }
-
-    //Repository
-    @Bean
-    public ICustomerRepository customerRepository() {
-        return new CustomerRepository();
-    }
-
-    //Service
-    @Bean
-    public ICustomerService customerService() {
-        return new CustomerService();
     }
 }

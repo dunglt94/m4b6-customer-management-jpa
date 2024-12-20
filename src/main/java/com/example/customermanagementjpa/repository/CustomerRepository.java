@@ -3,10 +3,7 @@ package com.example.customermanagementjpa.repository;
 import com.example.customermanagementjpa.model.Customer;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -49,5 +46,14 @@ public class CustomerRepository implements ICustomerRepository {
         if (customer != null) {
             entityManager.remove(customer);
         }
+    }
+
+    public boolean saveWithStoredProcedure(Customer customer) {
+        String sql = "CALL insert_customer(:name, :email, :address)";
+        Query query = entityManager.createNativeQuery(sql);
+        query.setParameter("name", customer.getName());
+        query.setParameter("email", customer.getEmail());
+        query.setParameter("address", customer.getAddress());
+        return query.executeUpdate() != 0;
     }
 }
